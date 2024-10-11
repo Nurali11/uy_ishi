@@ -26,31 +26,28 @@ Narxi: {i[4]} so'm''')
 
     def count_pasaytirish(id):
         text = ""
-        found = False
         with open('info.txt') as f:
             for i in f.read().split('\n'):
                 if len(i) != 0:
                     i = i.split(',')
                     if i[0] == str(id):
-                        found = True
                         if int(i[3]) <= 0:
                             print('Shundoq ham bu kitobdan yoq')
                             return 
                         i[3] = str(int(i[3]) - 1)
                     text += f"{i[0]},{i[1]},{i[2]},{i[3]},{i[4]}\n"
         
-        if found:
+        if len(text) != 0:
             with open('info.txt', 'w') as t:
                 t.write(text)
+        if id in lst:
+            print('Bu id ochirilgan')
         else:
-            if id in lst:
-                print('Bu id ochirilgan')
-            else:
-                print('Bunday idli kitob mavjud emas')
+            print('Bunday idli kitob mavjud emas')
 
     def ochirish(id):
         text = ""
-        found = False
+        id_topish = False
         with open('info.txt') as f:
             for i in f.read().split('\n'):
                 if len(i) != 0:
@@ -58,9 +55,9 @@ Narxi: {i[4]} so'm''')
                     if i[0] != id:
                         text += f"{i[0]},{i[1]},{i[2]},{i[3]},{i[4]}\n"
                     else:
-                        found = True
+                        id_topish = True
                         lst.append(i[0])
-        if found:
+        if id_topish:
             with open('info.txt', 'w') as t:
                 t.write(text)
         else:
